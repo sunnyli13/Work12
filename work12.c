@@ -5,9 +5,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int main() {
+int main(int argc, char **argv) {
 
-	DIR *d = opendir(".");
+	char *selected_dir; 
+
+	if (argc > 1)
+		selected_dir = argv[1]; 
+
+	else {
+		printf("Choose a directory: "); 
+		selected_dir = malloc(100 * sizeof(char)); 
+		scanf("%s", selected_dir); 
+	}
+
+	DIR *d = opendir(selected_dir);
 	struct dirent *entry;
 	entry = readdir(d);
 	struct stat file;
